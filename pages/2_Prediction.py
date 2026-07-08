@@ -91,42 +91,7 @@ filtered = winner_data[
     winner_data[f"st_name_{selected_state}"] == True
 ]
 
-# ============================
-# Historical / Future Year
-# ============================
 
-if prediction_mode == "📜 Historical Prediction":
-
-    with st.sidebar:
-
-        years = sorted(filtered["year"].unique())
-
-        selected_year = st.selectbox(
-            "📅 Select Election Year",
-            years
-        )
-
-    filtered = filtered[
-        filtered["year"] == selected_year
-    ]
-
-else:
-
-    with st.sidebar:
-
-        latest_year = int(filtered["year"].max())
-
-        future_year = st.number_input(
-            "🚀 Future Election Year",
-            min_value=latest_year + 1,
-            max_value=2100,
-            value=latest_year + 5,
-            step=1
-        )
-
-    filtered = filtered[
-        filtered["year"] == latest_year
-    ]
 
 # Constituency
 constituencies = sorted(filtered["Constituency"].unique())
