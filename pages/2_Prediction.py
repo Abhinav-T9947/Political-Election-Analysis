@@ -42,12 +42,101 @@ st.set_page_config(
 
 # Sidebar
 with st.sidebar:
+
     st.title("🗳️ Election Analysis")
+
     st.success("Decision Tree Model")
+
     st.write("Model Accuracy")
-    st.progress(0.987)     # Replace with your actual accuracy
+    st.progress(0.987)
+
     st.write("Version 1.0")
 
+    st.divider()
+
+    st.subheader("🔮 Prediction Mode")
+
+    prediction_mode = st.radio(
+        "",
+        [
+            "📜 Historical Prediction",
+            "🚀 Future Election Simulation"
+        ]
+    )
+
+    st.divider()
+
+    st.subheader("📥 Election Details")
+
+    # -----------------------------
+    # Select State
+    # -----------------------------
+    selected_state = st.selectbox(
+        "📍 State",
+        states
+    )
+
+    filtered = winner_data[
+        winner_data[f"st_name_{selected_state}"] == True
+    ]
+
+    # =====================================================
+    # HISTORICAL PREDICTION
+    # =====================================================
+
+    if prediction_mode == "📜 Historical Prediction":
+
+        years = sorted(filtered["year"].unique())
+
+        selected_year = st.selectbox(
+            "📅 Election Year",
+            years
+        )
+
+        filtered = filtered[
+            filtered["year"] == selected_year
+        ]
+
+        constituencies = sorted(filtered["Constituency"].unique())
+
+        selected_constituency = st.selectbox(
+            "🏛 Constituency",
+            constituencies
+        )
+
+        filtered = filtered[
+            filtered["Constituency"] == selected_constituency
+        ]
+
+    # =====================================================
+    # FUTURE SIMULATION
+    # =====================================================
+
+    else:
+
+        latest_year = filtered["year"].max()
+
+        filtered = filtered[
+            filtered["year"] == latest_year
+        ]
+
+        constituencies = sorted(filtered["Constituency"].unique())
+
+        selected_constituency = st.selectbox(
+            "🏛 Constituency",
+            constituencies
+        )
+
+        filtered = filtered[
+            filtered["Constituency"] == selected_constituency
+        ]
+
+        future_year = st.number_input(
+            "📅 Future Election Year",
+            min_value=int(latest_year + 1),
+            value=int(latest_year + 5),
+            step=1
+        )
 # Main Title
 st.title("🗳️ Political & Election Analysis")
 
@@ -55,51 +144,6 @@ st.caption("Machine Learning Based Election Winner Prediction Dashboard")
 
 st.markdown("---")
 
-# ==========================================
-# Prediction Mode
-# ==========================================
-
-st.subheader("🔮 Prediction Mode")
-
-prediction_mode = st.radio(
-    "Choose Prediction Type",
-    [
-        "📜 Historical Prediction",
-        "🚀 Future Election Simulation"
-    ],
-    horizontal=True
-)
-
-st.markdown("---")
-
-# ----------------------------
-# User Inputs
-# ----------------------------
-# ==========================================
-# SIDEBAR INPUTS
-# ==========================================
-
-st.sidebar.header("📥 Election Details")
-
-# State
-selected_state = st.sidebar.selectbox(
-    "📍 Select State",
-    states
-)
-
-filtered = winner_data[
-    winner_data[f"st_name_{selected_state}"] == True
-]
-
-
-
-# Constituency
-constituencies = sorted(filtered["Constituency"].unique())
-
-selected_constituency = st.sidebar.selectbox(
-    "🏛 Select Constituency",
-    constituencies
-)
 
 filtered = filtered[
     filtered["Constituency"] == selected_constituency
