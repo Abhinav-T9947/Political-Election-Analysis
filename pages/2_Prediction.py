@@ -9,10 +9,27 @@ import pandas as pd
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-dt_model = joblib.load(BASE_DIR / "dt_model.pkl")
-encoders = joblib.load(BASE_DIR / "encoders.pkl")
-winner_data = joblib.load(BASE_DIR / "winner_data.pkl")
+# ----------------------------
+# Load Files (Cached)
+# ----------------------------
 
+BASE_DIR = Path(__file__).resolve().parent.parent
+
+@st.cache_resource
+def load_model():
+    return joblib.load(BASE_DIR / "dt_model.pkl")
+
+@st.cache_resource
+def load_encoders():
+    return joblib.load(BASE_DIR / "encoders.pkl")
+
+@st.cache_data
+def load_data():
+    return joblib.load(BASE_DIR / "winner_data.pkl")
+
+dt_model = load_model()
+encoders = load_encoders()
+winner_data = load_data()
 # Decode encoded columns
 winner_data["Constituency"] = encoders["ac_name"].inverse_transform(
     winner_data["ac_name"]
