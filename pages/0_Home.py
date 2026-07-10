@@ -1,5 +1,19 @@
 import streamlit as st
+import streamlit as st
+from pathlib import Path
 
+st.set_page_config(
+    page_title="Political & Election Analysis",
+    page_icon="🗳️",
+    layout="wide"
+)
+
+BASE_DIR = Path(__file__).resolve().parent.parent
+
+st.image(
+    BASE_DIR / "assets" / "banner.png",
+    use_container_width=True
+)
 st.set_page_config(
     page_title="Political & Election Analysis",
     page_icon="🗳️",
@@ -10,17 +24,21 @@ st.set_page_config(
 # Header
 # --------------------------
 
-st.title("🗳️ Political & Election Analysis Dashboard")
+st.title("🗳️ Political & Election Analysis")
 
 st.markdown("""
-### Machine Learning Based Election Analytics & Winner Prediction
+## Machine Learning Based Election Winner Prediction System
 
-This dashboard provides comprehensive analysis of Indian Assembly Elections
-using Data Analytics and Machine Learning.
+Welcome to an interactive analytics dashboard that explores historical Indian Assembly Elections
+and predicts winning political parties using Machine Learning.
+
+**Developed using:**
+🐍 Python • 🤖 Scikit-Learn • 📊 Plotly • 🌐 Streamlit
 """)
 
-st.divider()
+st.success("🎯 Deployment Model: Decision Tree Classifier | Accuracy: 98.71%")
 
+st.divider()
 # --------------------------
 # Project Overview
 # --------------------------
@@ -37,6 +55,24 @@ The dashboard enables users to:
 - 🏛 Explore constituency-wise information
 - 📈 Compare machine learning models
 - 🔮 Predict winning political parties
+""")
+
+st.divider()
+st.subheader("⚙️ Project Workflow")
+
+st.markdown("""Election Dataset
+↓
+Data Cleaning
+↓
+Exploratory Data Analysis
+↓
+Feature Engineering
+↓
+Model Training
+↓
+Prediction
+↓
+Web Deployment
 """)
 
 st.divider()
@@ -115,16 +151,34 @@ st.divider()
 # Technologies
 # --------------------------
 
-st.subheader("🛠 Technologies Used")
+st.subheader("🛠 Technology Stack")
 
-tech1, tech2, tech3, tech4 = st.columns(4)
+c1, c2, c3 = st.columns(3)
 
-tech1.metric("🐍 Python", "3.x")
-tech2.metric("🤖 Scikit-Learn", "ML")
-tech3.metric("📊 Pandas", "Data Analysis")
-tech4.metric("🎨 Streamlit", "Dashboard")
+with c1:
+    st.success("🐍 Python")
+    st.success("📊 Pandas")
+    st.success("🔢 NumPy")
+
+with c2:
+    st.success("🤖 Scikit-Learn")
+    st.success("📈 Plotly")
+    st.success("💾 Joblib")
+
+with c3:
+    st.success("🌐 Streamlit")
+    st.success("📁 GitHub")
+    st.success("☁️ Streamlit Cloud")
 
 st.divider()
+st.subheader("📊 Project Statistics")
+
+col1, col2, col3, col4 = st.columns(4)
+
+col1.metric("Dataset Size", "32,864")
+col2.metric("Models", "3")
+col3.metric("Accuracy", "98.71%")
+col4.metric("Deployment", "Live")
 
 # --------------------------
 # Quick Navigation
