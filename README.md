@@ -181,18 +181,35 @@ streamlit run app.py
 
 ## 📸 Screenshots
 
-Add screenshots here after deployment.
+## 📸 Application Screenshots
 
-Suggested screenshots:
+### 🏠 Home Page
 
-- 🏠 Home Page
-- 📊 Analysis Dashboard
-- 🔮 Prediction Page
-- 📈 Model Development
-- 📄 About Page
+![Home](screenshots/home.png)
 
 ---
 
+### 📊 Analysis Dashboard
+
+![Dashboard](screenshots/dashboard.png)
+
+---
+
+### 🔮 Winner Prediction
+
+![Prediction](screenshots/prediction.png)
+
+---
+
+### 📈 Model Development
+
+![Models](screenshots/models.png)
+
+---
+
+### 📄 About Project
+
+![About](screenshots/about.png)
 ## 🎯 Future Enhancements
 
 - Deep Learning Models
